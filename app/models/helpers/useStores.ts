@@ -44,7 +44,7 @@ export const useStores = () => useContext(RootStoreContext)
 
 /**
  * Used only in the app.tsx file, this hook sets up the RootStore
- * and then rehydrates it. It connects everything with Reactotron
+ * and then rehydrates it. 
  * and then lets the app know that everything is ready to go.
  */
 export const useInitialRootStore = (callback: () => void | Promise<void>) => {
@@ -58,11 +58,6 @@ export const useInitialRootStore = (callback: () => void | Promise<void>) => {
       // set up the RootStore (returns the state restored from AsyncStorage)
       const { unsubscribe } = await setupRootStore(rootStore)
       _unsubscribe = unsubscribe
-
-      // reactotron integration with the MST root store (DEV only)
-      if (__DEV__) {
-        console.tron.trackMstNode(rootStore)
-      }
 
       // let the app know we've finished rehydrating
       setRehydrated(true)

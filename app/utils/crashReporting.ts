@@ -40,10 +40,6 @@ export enum ErrorType {
    * and force the user to sign out and restart.
    */
   FATAL = "Fatal",
-  /**
-   * An error caught by try/catch where defined using Reactotron.tron.error.
-   */
-  HANDLED = "Handled",
 }
 
 /**
@@ -51,11 +47,10 @@ export enum ErrorType {
  */
 export const reportCrash = (error: Error, type: ErrorType = ErrorType.FATAL) => {
   if (__DEV__) {
-    // Log to console and Reactotron in development
+    // Log to console in development
     const message = error.message || "Unknown"
     console.error(error)
     console.log(message, type)
-    console.tron.log(error)
   } else {
     // In production, utilize crash reporting service of choice below:
     // RN
